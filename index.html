@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Popularity Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Music Popularity Tracker</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-type="albums">Albums</a></li>
+                    <li><a href="#" data-type="tracks">Tracks</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="time-filters">
+            <button class="time-btn active" data-period="day">Today</button>
+            <button class="time-btn" data-period="week">This Week</button>
+            <button class="time-btn" data-period="month">This Month</button>
+            <button class="time-btn" data-period="year">This Year</button>
+        </div>
+
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="results-container">
+            <div id="results" class="results-grid"></div>
+            
+            <div class="pagination">
+                <button id="prev-page" class="page-btn" disabled>Previous</button>
+                <span id="page-info">Page 1</span>
+                <button id="next-page" class="page-btn">Next</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Powered by Last.fm and Discogs APIs</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,39 +1,390 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
+:root {
+    --primary-color: #1db954;
+    --secondary-color: #191414;
+    --text-color: #ffffff;
+    --background-color: #121212;
+    --card-background: #181818;
+    --hover-color: #282828;
+}
+
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
-h1 {
-    text-align: center;
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
-#controls, #periods {
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: var(--secondary-color);
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+main {
+    padding: 40px 0;
+}
+
+.time-filters {
     display: flex;
     justify-content: center;
-    margin: 10px 0;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
 }
-button {
-    margin: 0 5px;
+
+.time-btn {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    margin: 0 5px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.time-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.time-btn.active {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.music-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }
-#results {
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
+.music-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
-.album, .song {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin: 10px;
-    padding: 20px;
-    width: 250px;
-    text-align: center;
-}
-.album img, .song img {
+
+.music-card img {
     width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.music-card-content {
+    padding: 15px;
+}
+
+.music-card h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-card p {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-card .play-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.music-card:hover .play-btn {
+    opacity: 1;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+footer {
+    background-color: var(--secondary-color);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+    }
+    
+    .results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+/* Add these new styles for the enhanced features */
+
+/* Music card details for Discogs data */
+.music-card-details {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #b3b3b3;
+}
+
+.music-card-details p {
+    margin: 2px 0;
+}
+
+.music-card-details span {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.page-btn {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: none;
+    padding: 8px 15px;
     border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.page-btn:hover:not(:disabled) {
+    background-color: var(--hover-color);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#page-info {
+    margin: 0 15px;
+    color: #b3b3b3;
+}
+
+/* Error container styles */
+.error-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.error {
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.retry-btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.retry-btn:hover {
+    background-color: #1ed760;
+}
+
+/* Refresh button */
+.refresh-btn {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-left: 10px;
+}
+
+.refresh-btn:hover {
+    background-color: var(--hover-color);
+    transform: rotate(180deg);
+}
+
+/* Animation for refresh button */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.refresh-btn.loading {
+    animation: spin 1s linear infinite;
+}
+
+/* Add these styles for better image handling */
+.img-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background-color: #121212;
+    border-radius: 8px 8px 0 0;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.music-card:hover .img-container img {
+    transform: scale(1.05);
+}
+
+.play-btn {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.music-card:hover .play-btn {
+    opacity: 1;
+}
+
+/* Ensure music cards have proper styling */
+.music-card {
+    position: relative;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.music-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.music-card-content {
+    padding: 15px;
+}
+
+.music-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-card p {
+    margin: 0;
+    color: #b3b3b3;
+    font-size: 0.9rem;
 }
